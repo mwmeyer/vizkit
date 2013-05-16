@@ -124,6 +124,20 @@ body {
 .vizkit-tooltip h1 {
   font-size: 12px;
 }
+
+rect {
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin 1px;
+    color: white;
+}
+
+rect {
+    stroke: white;
+    fill: steelblue;
+}
+
 </style>
 </head>
 <body>
@@ -166,16 +180,11 @@ var data = [
   ],
 ];
 
-var DrawViz = vizkit.linechart(data)
-                     .yAxis({title: 'foo', scale: 'linear'})
-                     .xAxis({title: 'bar', scale: 'linear'})
-                     .legend({addMouseoverClasses: true, symbol: {type: 'cross'}})
-                     .tooltip({content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"});
+var DrawViz = vizkit.barchart(data)
+                    .xAxis({scale: 'ordinal'});
 
 
 DrawViz(d3.select('.viz'));
-
-
 
 /*
 var i = 6;

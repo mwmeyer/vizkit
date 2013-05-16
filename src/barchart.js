@@ -1,9 +1,9 @@
   
 
   //---------------------
-  // Line Chart
+  // Bar Chart
   //---------------------
-  vizkit.linechart = function(data) {
+  vizkit.barchart = function(data) {
 
     var xAxis = {scale: 'linear', gridLine: false},
         yAxis = {scale: 'linear', gridLine: false},
@@ -65,7 +65,7 @@
 
         x.domain(d3.merge(data).map(function(d) { return d.xValue; }));
 
-        x.rangePoints([margin, width - margin], 1); // second param controls tick pos
+        x.rangeRoundBands([margin, width - margin], .5);
       }
       else if (xAxis.scale == 'time'){
         var x = d3.time.scale(),
@@ -138,54 +138,7 @@
           .attr("transform", "translate("+margin+", 0)")
           .call(yAx);
 
-
-      /* ---- Graph Line/s ---- */
-      var pathContainers = svg.selectAll('g.line')
-                              .data(data)
-                              .enter().append('g')
-                              .attr('class', function(d){ return 'line-' +  (data.indexOf(d) + 1) });
-
-      var line_path = d3.svg.line().x(xDataIter).y(yDataIter);
-      if (line.interpolate) line_path.interpolate(line.interpolate);
-
-      pathContainers.selectAll('path')
-        .data(function (d) { return [d]; })
-        .enter().append('path')
-        .attr('d', line_path);
-
-
-      /* ---- Peak Symbols ---- */
-      var peakSymbol = d3.svg.symbol().type('circle').size(20);
-      if (line.symbol && line.symbol.type) peakSymbol.type(line.symbol.type);
-      if (line.symbol && line.symbol.size) peakSymbol.size(line.symbol.size);
-
-      var peaks = pathContainers.selectAll('path')
-                                .data(function (d) { return d; })
-                                .enter().append('path')
-                                .attr("transform", function(d) { return "translate(" + x(d.xValue) + "," + y(d.yValue) + ")"; })
-                                .attr('d', peakSymbol)
-                                .attr('class', 'symbol');
-
-
-      /* ---- Peak Tooltip ---- */
-      var chartTooltip = vizContainer.append("div")
-                      .attr('class', 'vizkit-tooltip')
-                      .style("position", "absolute")
-                      .style("z-index", "10")
-                      .style("visibility", "hidden");
-
-      peaks.on("mouseover", function(d){
-
-                      return chartTooltip.style("visibility", "visible")
-                                    .html(tooltip.content.replace('{{key}}', d.key)
-                                                         .replace('{{xValue}}', d.xValue)
-                                                         .replace('{{yValue}}', d.yValue));
-                })
-           .on("mousemove", function(){return chartTooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-           .on("mouseout", function(){return chartTooltip.style("visibility", "hidden");});
                                 
-
-
       /* ---- Axis Titles ---- */
       if (xAxis.title){
         svg.append("text")
@@ -267,6 +220,18 @@
                   if (true) return i *  20 + 4;
                 })
                 .text(function(d){ return d[0].key; });
+
+
+          /* ---- Graph Bar/s ---- */
+          svg.selectAll(".bar")
+          .data(data)
+          .enter().append("rect")
+          .attr("class", "bar")
+          .attr("x", function(d) { return xDataIter(d); })
+          .attr("width", 10) //x.rangeBand()
+          .attr("y", function(d) { return yDataIter(d); })
+          .attr("height", function(d) { return 10 });
+
         }
 
     }

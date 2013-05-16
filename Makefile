@@ -1,6 +1,7 @@
 src = \
 	src/start.js \
 	src/utils.js \
+	src/barchart.js \
 	src/linechart.js \
 	src/gauge.js \
 	src/end.js
