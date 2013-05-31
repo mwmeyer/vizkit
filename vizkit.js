@@ -240,15 +240,39 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                 .text(function(d){ return d[0].key; });
 
 
+
           /* ---- Graph Bar/s ---- */
-          svg.selectAll(".bar")
-          .data(data)
+
+          var barContainers = svg.selectAll('.barContainers')
+                              .data(data)
+                              .enter().append('g')
+                              .attr('class', function(d){ return 'bar-set-' +  (data.indexOf(d) + 1) })
+                              .attr("transform", function(d) { 
+                                console.log(data);
+                                console.log(data.indexOf(d));
+                                console.log(d);
+                                return "translate(" + (data.indexOf(d) * 10) + ",0)"; });
+
+          barContainers.selectAll(".bar")
+          .data(function(d){ 
+            //console.log(d);
+            return d; })
           .enter().append("rect")
-          .attr("class", "bar")
-          .attr("x", function(d) { return xDataIter(d); })
+          .attr("class", function(d){ return d.key + '-bar'})
+          .attr("x", function(d) { 
+            //console.log(d.xValue);
+            return x(d.xValue); 
+          })
           .attr("width", 10) //x.rangeBand()
-          .attr("y", function(d) { return yDataIter(d); })
-          .attr("height", function(d) { return 10 });
+          .attr("y", function(d) { 
+            //console.log(d.yValue); 
+            return y(d.yValue); 
+          })
+          .attr("height", function(d) { 
+            console.log(height);
+            console.log(margin);
+            console.log(y(d.yValue))
+            return height - y(d.yValue) - margin; });
 
         }
 
