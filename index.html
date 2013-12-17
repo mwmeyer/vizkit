@@ -1,9 +1,162 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+body {
+  font: helvetica;
+}
 
+.axis path {
+  fill: none;
+  stroke: #C0C0C0;
+  shape-rendering: crispEdges;
+}
+.tick.major line {
+  stroke: #C0C0C0;
+  shape-rendering: crispEdges;
+}
+
+.area-1 {
+  fill: #7591FF;
+}
+.line-1 {
+  fill: none;
+  stroke: #7591FF;
+}
+.line-1 .symbol {
+  fill: white;
+}
+.key-1 {
+  fill: #7591FF;
+  cursor: pointer;
+}
+
+.area-2 {
+  fill: #F24E4E;
+}
+.line-2 {
+  fill: none;
+  stroke: #F24E4E;
+}
+.line-2 .symbol {
+  fill: white;
+}
+.key-2 {
+  fill: #F24E4E;
+  cursor: pointer;
+}
+
+.area-3 {
+  fill: #00E00F;
+}
+.line-3 {
+  fill: none;
+  stroke: #00E00F;
+}
+.line-3 .symbol {
+  fill: white;
+}
+.key-3 {
+  fill: #00E00F;
+  cursor: pointer;
+}
+
+.area-4 {
+  fill: #FCFC21;
+}
+.line-4 {
+  fill: none;
+  stroke: #FCFC21;
+}
+.line-4 .symbol {
+  fill: white;
+}
+.key-4 {
+  fill: #FCFC21;
+  cursor: pointer;
+}
+
+.line-mo {
+  -webkit-svg-shadow: 0 0 7px #53BE12;
+}
+.key-mo {
+  -webkit-svg-shadow: 0 0 7px #53BE12;
+}
+.line-nomo {
+  stroke: whiteSmoke;
+}
+.key-nomo {
+  fill: whiteSmoke;
+}
+
+.viz {
+  height: 500px;
+  margin: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.area {
+  fill: steelBlue;
+}
+
+.y-title, .x-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.y-title {
+  /*letter-spacing: 10px;*/
+  /*baseline-shift: 20px;*/
+}
+
+.legend {
+  font-size: 12px;
+}
+
+.vizkit-tooltip {
+  background-color: whiteSmoke;
+  padding: 5px;
+  border: 1px solid #E0E0E0;
+}
+
+.vizkit-tooltip h1 {
+  font-size: 12px;
+}
+</style>
 </head>
 <body>
-  gh-pages
+
+
+<div class="viz"></div>
+
+<script src="d3.js"></script>
+<script src="vizkit.js"></script>
+<script>
+
+var data = [
+  [
+    {"key": "apple", "xValue": '1', "yValue": '1'},
+    {"key": "apple", "xValue": '2', "yValue": '2'},
+    {"key": "apple", "xValue": '3', "yValue": '5'},
+    {"key": "apple", "xValue": '4', "yValue": '4'},
+    {"key": "apple", "xValue": '5', "yValue": '2'}
+  ]
+];
+
+var DrawViz = vizkit.linechart(data)
+                     .yAxis({title: 'foo', scale: 'linear'})
+                     .xAxis({title: 'bar', scale: 'linear'})
+                     .area(true)
+                     .legend({addMouseoverClasses: true, symbol: {type: 'cross'}})
+                     .tooltip(false);
+
+
+DrawViz(d3.select('.viz'));
+
+
+window.onresize = function(event) {
+  d3.select('.viz svg').remove();
+  DrawViz(d3.select('.viz'));
+}
+</script>
 </body>
 </html>
