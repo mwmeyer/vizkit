@@ -3,19 +3,6 @@
 <head>
 <style>
 
-/*
-.y.axis .domain {
-  stroke: #000000;
-  stroke-width: 3;
-  shape-rendering: crispEdges;
-}
-.x.axis .domain {
-  stroke: #000000;
-  stroke-width: 3;
-  shape-rendering: crispEdges;
-}
-*/
-
 body {
   font: helvetica;
 }
@@ -92,7 +79,6 @@ body {
 }
 
 .viz {
-  /*border: 1px solid black;*/
   height: 500px;
   margin: 20px;
   font-family: 'Open Sans', sans-serif;
@@ -105,10 +91,6 @@ body {
 .y-title, .x-title {
   font-size: 20px;
   font-weight: bold;
-}
-.y-title {
-  /*letter-spacing: 10px;*/
-  /*baseline-shift: 20px;*/
 }
 
 .legend {
@@ -124,33 +106,9 @@ body {
 .vizkit-tooltip h1 {
   font-size: 12px;
 }
-
-rect {
-    stroke: black;
-    fill: white;
-}
-
-.apple-bar {
-  fill: green;
-}
-
-.banana-bar {
-  fill: yellow;
-}
-
-.orange-bar {
-  fill: orange;
-}
-
-.cherry-bar {
-  fill: red;
-}
-
-
 </style>
 </head>
 <body>
-
 
 <div class="viz"></div>
 
@@ -189,22 +147,14 @@ var data = [
   ],
 ];
 
-var DrawViz = vizkit.barchart(data)
-                    .xAxis({scale: 'ordinal'});
+var DrawViz = vizkit.linechart(data)
+                     .yAxis({title: 'foo', scale: 'linear'})
+                     .xAxis({title: 'bar', scale: 'linear'})
+                     .legend({addMouseoverClasses: true, symbol: {type: 'circle'}})
+                     .tooltip({content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"});
 
 
 DrawViz(d3.select('.viz'));
-
-/*
-var i = 6;
-setInterval(function() {
-  d3.select('.viz svg').remove();
-  data[0].push({"key": "apple", "xValue": i, "yValue": i});
-  DrawViz(d3.select('.viz'));
-  i++;
-}, 1000);
-*/
-
 
 window.onresize = function(event) {
   d3.select('.viz svg').remove();

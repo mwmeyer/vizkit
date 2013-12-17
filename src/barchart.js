@@ -6,7 +6,7 @@
   vizkit.barchart = function(data) {
 
     var xAxis = {scale: 'linear', gridLine: false},
-        yAxis = {scale: 'linear', gridLine: false},
+        yAxis = {scale: 'linear', gridLine: false, minVal: 0},
         line = {interpolate: 'linear'},
         legend = {},
         tooltip = {content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"};
@@ -53,8 +53,8 @@
             x_data_min = xExtents[0],
             x_data_max = xExtents[1];
 
-        if(xAxis.minVal) x_data_min = xAxis.minVal;
-        if(xAxis.maxVal) x_data_max = xAxis.maxVal;
+        if(typeof xAxis.minVal !== 'undefined') x_data_min = xAxis.minVal;
+        if(typeof xAxis.maxVal !== 'undefined') x_data_max = xAxis.maxVal;
 
         x.domain([x_data_min, x_data_max]);
         x.range([margin, width - margin]);
@@ -83,11 +83,11 @@
         var y = d3.scale.linear(),
             yDataIter = function(d){ return y(d.yValue);},
             yExtents = d3.extent(d3.merge(data), yDataIter),
-            y_data_min = yExtents[0], 
+            y_data_min = yExtents[0],
             y_data_max = yExtents[1];
 
-        if(yAxis.minVal) y_data_min = yAxis.minVal;
-        if(yAxis.maxVal) y_data_max = yAxis.maxVal;
+        if(typeof yAxis.minVal !== 'undefined') y_data_min = yAxis.minVal;
+        if(typeof yAxis.maxVal !== 'undefined') y_data_max = yAxis.maxVal;
 
         y.domain([y_data_min, y_data_max]);
         y.range([height - margin, margin]);
@@ -117,7 +117,7 @@
           .orient("bottom")
           .tickFormat(xtFormat);
 
-      if (xAxis.gridLine) xAx.tickSize(-height + (margin * 2), 10, 0).tickPadding(5); 
+      if (xAxis.gridLine) xAx.tickSize(-height + (margin * 2), 10, 0).tickPadding(5);
       if (xAxis.ticks) xAx.ticks(xAxis.ticks);
 
       var yAx = d3.svg.axis()
@@ -125,7 +125,7 @@
           .orient("left")
           .tickFormat(ytFormat);
 
-      if (yAxis.gridLine) yAx.tickSize(-width + (margin  * 2), 0, 0).tickPadding(5);  
+      if (yAxis.gridLine) yAx.tickSize(-width + (margin  * 2), 0, 0).tickPadding(5); 
       if (yAxis.ticks) yAx.ticks(yAxis.ticks);
       
       svg.append("g")
@@ -230,30 +230,22 @@
                               .enter().append('g')
                               .attr('class', function(d){ return 'bar-set-' +  (data.indexOf(d) + 1) })
                               .attr("transform", function(d) { 
-                                console.log(data);
-                                console.log(data.indexOf(d));
-                                console.log(d);
-                                return "translate(" + (data.indexOf(d) * 10) + ",0)"; });
+                                return "translate(" + ((data.indexOf(d) * 10) + 50) + ",0)"; }
+                              );
 
           barContainers.selectAll(".bar")
           .data(function(d){ 
-            //console.log(d);
             return d; })
           .enter().append("rect")
           .attr("class", function(d){ return d.key + '-bar'})
           .attr("x", function(d) { 
-            //console.log(d.xValue);
             return x(d.xValue); 
           })
           .attr("width", 10) //x.rangeBand()
           .attr("y", function(d) { 
-            //console.log(d.yValue); 
             return y(d.yValue); 
           })
           .attr("height", function(d) { 
-            console.log(height);
-            console.log(margin);
-            console.log(y(d.yValue))
             return height - y(d.yValue) - margin; });
 
         }

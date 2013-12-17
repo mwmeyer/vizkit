@@ -24,7 +24,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
   vizkit.barchart = function(data) {
 
     var xAxis = {scale: 'linear', gridLine: false},
-        yAxis = {scale: 'linear', gridLine: false},
+        yAxis = {scale: 'linear', gridLine: false, minVal: 0},
         line = {interpolate: 'linear'},
         legend = {},
         tooltip = {content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"};
@@ -71,8 +71,8 @@ vizkit.utils.merge_objs = function(obj1,obj2){
             x_data_min = xExtents[0],
             x_data_max = xExtents[1];
 
-        if(xAxis.minVal) x_data_min = xAxis.minVal;
-        if(xAxis.maxVal) x_data_max = xAxis.maxVal;
+        if(typeof xAxis.minVal !== 'undefined') x_data_min = xAxis.minVal;
+        if(typeof xAxis.maxVal !== 'undefined') x_data_max = xAxis.maxVal;
 
         x.domain([x_data_min, x_data_max]);
         x.range([margin, width - margin]);
@@ -101,11 +101,11 @@ vizkit.utils.merge_objs = function(obj1,obj2){
         var y = d3.scale.linear(),
             yDataIter = function(d){ return y(d.yValue);},
             yExtents = d3.extent(d3.merge(data), yDataIter),
-            y_data_min = yExtents[0], 
+            y_data_min = yExtents[0],
             y_data_max = yExtents[1];
 
-        if(yAxis.minVal) y_data_min = yAxis.minVal;
-        if(yAxis.maxVal) y_data_max = yAxis.maxVal;
+        if(typeof yAxis.minVal !== 'undefined') y_data_min = yAxis.minVal;
+        if(typeof yAxis.maxVal !== 'undefined') y_data_max = yAxis.maxVal;
 
         y.domain([y_data_min, y_data_max]);
         y.range([height - margin, margin]);
@@ -135,7 +135,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
           .orient("bottom")
           .tickFormat(xtFormat);
 
-      if (xAxis.gridLine) xAx.tickSize(-height + (margin * 2), 10, 0).tickPadding(5); 
+      if (xAxis.gridLine) xAx.tickSize(-height + (margin * 2), 10, 0).tickPadding(5);
       if (xAxis.ticks) xAx.ticks(xAxis.ticks);
 
       var yAx = d3.svg.axis()
@@ -143,7 +143,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
           .orient("left")
           .tickFormat(ytFormat);
 
-      if (yAxis.gridLine) yAx.tickSize(-width + (margin  * 2), 0, 0).tickPadding(5);  
+      if (yAxis.gridLine) yAx.tickSize(-width + (margin  * 2), 0, 0).tickPadding(5); 
       if (yAxis.ticks) yAx.ticks(yAxis.ticks);
       
       svg.append("g")
@@ -248,30 +248,22 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                               .enter().append('g')
                               .attr('class', function(d){ return 'bar-set-' +  (data.indexOf(d) + 1) })
                               .attr("transform", function(d) { 
-                                console.log(data);
-                                console.log(data.indexOf(d));
-                                console.log(d);
-                                return "translate(" + (data.indexOf(d) * 10) + ",0)"; });
+                                return "translate(" + ((data.indexOf(d) * 10) + 50) + ",0)"; }
+                              );
 
           barContainers.selectAll(".bar")
           .data(function(d){ 
-            //console.log(d);
             return d; })
           .enter().append("rect")
           .attr("class", function(d){ return d.key + '-bar'})
           .attr("x", function(d) { 
-            //console.log(d.xValue);
             return x(d.xValue); 
           })
           .attr("width", 10) //x.rangeBand()
           .attr("y", function(d) { 
-            //console.log(d.yValue); 
             return y(d.yValue); 
           })
           .attr("height", function(d) { 
-            console.log(height);
-            console.log(margin);
-            console.log(y(d.yValue))
             return height - y(d.yValue) - margin; });
 
         }
@@ -315,6 +307,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
 
     var xAxis = {scale: 'linear', gridLine: false},
         yAxis = {scale: 'linear', gridLine: false},
+        area = false,
         line = {interpolate: 'linear'},
         legend = {},
         tooltip = {content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"};
@@ -361,8 +354,8 @@ vizkit.utils.merge_objs = function(obj1,obj2){
             x_data_min = xExtents[0],
             x_data_max = xExtents[1];
 
-        if(xAxis.minVal) x_data_min = xAxis.minVal;
-        if(xAxis.maxVal) x_data_max = xAxis.maxVal;
+        if(typeof xAxis.minVal !== 'undefined') x_data_min = xAxis.minVal;
+        if(typeof xAxis.maxVal !== 'undefined') x_data_max = xAxis.maxVal;
 
         x.domain([x_data_min, x_data_max]);
         x.range([margin, width - margin]);
@@ -391,11 +384,11 @@ vizkit.utils.merge_objs = function(obj1,obj2){
         var y = d3.scale.linear(),
             yDataIter = function(d){ return y(d.yValue);},
             yExtents = d3.extent(d3.merge(data), yDataIter),
-            y_data_min = yExtents[0], 
+            y_data_min = yExtents[0],
             y_data_max = yExtents[1];
 
-        if(yAxis.minVal) y_data_min = yAxis.minVal;
-        if(yAxis.maxVal) y_data_max = yAxis.maxVal;
+        if(typeof yAxis.minVal !== 'undefined') y_data_min = yAxis.minVal;
+        if(typeof yAxis.maxVal !== 'undefined') y_data_max = yAxis.maxVal;
 
         y.domain([y_data_min, y_data_max]);
         y.range([height - margin, margin]);
@@ -425,7 +418,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
           .orient("bottom")
           .tickFormat(xtFormat);
 
-      if (xAxis.gridLine) xAx.tickSize(-height + (margin * 2), 10, 0).tickPadding(5); 
+      if (xAxis.gridLine) xAx.tickSize(-height + (margin * 2), 10, 0).tickPadding(5);
       if (xAxis.ticks) xAx.ticks(xAxis.ticks);
 
       var yAx = d3.svg.axis()
@@ -433,7 +426,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
           .orient("left")
           .tickFormat(ytFormat);
 
-      if (yAxis.gridLine) yAx.tickSize(-width + (margin  * 2), 0, 0).tickPadding(5);  
+      if (yAxis.gridLine) yAx.tickSize(-width + (margin  * 2), 0, 0).tickPadding(5);
       if (yAxis.ticks) yAx.ticks(yAxis.ticks);
       
       svg.append("g")
@@ -446,12 +439,27 @@ vizkit.utils.merge_objs = function(obj1,obj2){
           .attr("transform", "translate("+margin+", 0)")
           .call(yAx);
 
+      /* ----Area Fill ---- */
+      if(area){
+        // https://github.com/mbostock/d3/wiki/SVG-Shapes#wiki-area
+        var areaGenerator = d3.svg.area()
+                      .x(xDataIter)
+                      .y0(height - margin)
+                      .y1(yDataIter);
+
+        var areaSvg = svg.selectAll("g.line")
+            .data(data)
+            .enter()
+            .append('path')
+            .attr("d", areaGenerator)
+            .attr('class', function(d){ return 'area-' +  (data.indexOf(d) + 1); });
+      }
 
       /* ---- Graph Line/s ---- */
       var pathContainers = svg.selectAll('g.line')
                               .data(data)
                               .enter().append('g')
-                              .attr('class', function(d){ return 'line-' +  (data.indexOf(d) + 1) });
+                              .attr('class', function(d){ return 'line-' +  (data.indexOf(d) + 1); });
 
       var line_path = d3.svg.line().x(xDataIter).y(yDataIter);
       if (line.interpolate) line_path.interpolate(line.interpolate);
@@ -476,24 +484,25 @@ vizkit.utils.merge_objs = function(obj1,obj2){
 
 
       /* ---- Peak Tooltip ---- */
-      var chartTooltip = vizContainer.append("div")
+      if(tooltip){
+        var chartTooltip = vizContainer.append("div")
                       .attr('class', 'vizkit-tooltip')
                       .style("position", "absolute")
                       .style("z-index", "10")
                       .style("visibility", "hidden");
 
-      peaks.on("mouseover", function(d){
+        peaks.on("mouseover", function(d){
 
-                      return chartTooltip.style("visibility", "visible")
-                                    .html(tooltip.content.replace('{{key}}', d.key)
-                                                         .replace('{{xValue}}', d.xValue)
-                                                         .replace('{{yValue}}', d.yValue));
-                })
-           .on("mousemove", function(){return chartTooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-           .on("mouseout", function(){return chartTooltip.style("visibility", "hidden");});
-                                
+                        return chartTooltip.style("visibility", "visible")
+                                      .html(tooltip.content.replace('{{key}}', d.key)
+                                                           .replace('{{xValue}}', d.xValue)
+                                                           .replace('{{yValue}}', d.yValue));
+                  })
+             .on("mousemove", function(){return chartTooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+             .on("mouseout", function(){return chartTooltip.style("visibility", "hidden");});
+      }
 
-
+    
       /* ---- Axis Titles ---- */
       if (xAxis.title){
         svg.append("text")
@@ -518,7 +527,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                         .attr("class", "legend")
                         .attr("height", 100)
                         .attr("width", 100)
-                        .attr('transform', 'translate(' + (width - 85) + ',' + 100 + ')');   
+                        .attr('transform', 'translate(' + (width - 85) + ',' + 100 + ')');
 
 
         var legendSymbol = d3.svg.symbol().type('square').size(100);
@@ -530,7 +539,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                                       .enter().append('path')
                                       .attr('d', legendSymbol)
                                       .attr("transform", function(d, i) { return "translate(" + 0 + "," + i *  20 + ")"; })
-                                      .attr('class', function(d){ return 'key-' +  (data.indexOf(d) + 1) });
+                                      .attr('class', function(d){ return 'key-' +  (data.indexOf(d) + 1)});
 
 
         if (legend.addMouseoverClasses){
@@ -568,46 +577,111 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                 .data(data)
                 .enter()
                 .append("text")
-                .attr('x', function(d, i){ 
+                .attr('x', function(d, i){
                   if (true) return 15;
                 })
-                .attr("y", function(d, i){ 
+                .attr("y", function(d, i){
                   if (true) return i *  20 + 4;
                 })
                 .text(function(d){ return d[0].key; });
         }
 
-    }
+    };
 
 
     viz.xAxis = function(value) {
       if(!arguments.length) return xAxis;
       xAxis = vizkit.utils.merge_objs(xAxis, value);
       return viz;
-    }
+    };
     viz.yAxis = function(value) {
       if(!arguments.length) return yAxis;
       yAxis = vizkit.utils.merge_objs(yAxis, value);
       return viz;
-    }
+    };
+    viz.area = function(value) {
+      if(!arguments.length) return area;
+      area = value;
+      return viz;
+    };
     viz.line = function(value) {
       if(!arguments.length) return line;
       line = vizkit.utils.merge_objs(line, value);
       return viz;
-    }
+    };
     viz.legend = function(value) {
       if(!arguments.length) return legend;
       legend = value;
       return viz;
-    }
+    };
     viz.tooltip = function(value) {
-      if(!arguments.length) return line;
-      tooltip = vizkit.utils.merge_objs(tooltip, value);
+      if(!arguments.length) return tooltip;
+      
+      if(value instanceof Object){
+        tooltip = vizkit.utils.merge_objs(tooltip, value);
+      }
+      else {
+        tooltip = false;
+      }
+      
       return viz;
-    }
+    };
     
     return viz;
-  }  
+  };  
+
+  //---------------------
+  // Pie Chart
+  //---------------------
+  vizkit.piechart = function(data) {
+
+    var foo = 1;
+    
+    var viz = function(vizContainer) {
+      var width = parseInt(vizContainer.style('width')),
+          height = parseInt(vizContainer.style('height')),
+          radius = height / 2,
+          color = d3.scale.category20c();
+
+      var svg = vizContainer.append("svg:svg")
+                            .data([data])
+                            .attr('width', width)
+                            .attr('height', height);
+
+      var arc = d3.svg.arc()
+                  .outerRadius(radius);
+
+      var pie = d3.layout.pie()
+                  .value(function(d) { return d.value; });
+
+      var arcs = svg.selectAll("g.slice")
+                    .data(pie)
+                    .enter()
+                    .append("svg:g")
+                    .attr("class", "slice")
+                    .attr("transform", "translate("+width/2+","+ height/2 +")");
+
+          arcs.append("svg:path")
+                  .attr("fill", function(d, i) { return color(i); } )
+                  .attr("d", arc);
+
+          arcs.append("svg:text")
+              .attr("transform", function(d) {
+                  d.innerRadius = 0;
+                  d.outerRadius = radius;
+                  return "translate(" + arc.centroid(d) + ")";
+              })
+              .attr("text-anchor", "middle")
+              .text(function(d, i) { return data[i].key; });
+    };
+
+    viz.foo = function(value) {
+      if(!arguments.length) return foo;
+      return viz;
+    };
+
+    return viz;
+  };  
 
   //---------------------
   // Gauge

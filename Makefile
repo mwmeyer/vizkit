@@ -3,6 +3,7 @@ src = \
 	src/utils.js \
 	src/barchart.js \
 	src/linechart.js \
+	src/piechart.js \
 	src/gauge.js \
 	src/end.js
 
