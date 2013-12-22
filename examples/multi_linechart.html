@@ -2,11 +2,6 @@
 <html>
 <head>
 <style>
-
-body {
-  font: helvetica;
-}
-
 .axis path {
   fill: none;
   stroke: #C0C0C0;
@@ -16,7 +11,6 @@ body {
   stroke: #C0C0C0;
   shape-rendering: crispEdges;
 }
-
 .line-1 {
   fill: none;
   stroke: #7591FF;
@@ -28,7 +22,6 @@ body {
   fill: #7591FF;
   cursor: pointer;
 }
-
 .line-2 {
   fill: none;
   stroke: #F24E4E;
@@ -40,7 +33,6 @@ body {
   fill: #F24E4E;
   cursor: pointer;
 }
-
 .line-3 {
   fill: none;
   stroke: #00E00F;
@@ -64,7 +56,6 @@ body {
   fill: #E0BF00;
   cursor: pointer;
 }
-
 .line-mo {
   -webkit-svg-shadow: 0 0 7px #53BE12;
 }
@@ -77,32 +68,25 @@ body {
 .key-nomo {
   fill: whiteSmoke;
 }
-
 .viz {
   height: 500px;
   margin: 20px;
-  font-family: 'Open Sans', sans-serif;
 }
-
 .area {
   fill: steelBlue;
 }
-
 .y-title, .x-title {
   font-size: 20px;
   font-weight: bold;
 }
-
 .legend {
   font-size: 12px;
 }
-
 .vizkit-tooltip {
   background-color: whiteSmoke;
   padding: 5px;
   border: 1px solid #E0E0E0;
 }
-
 .vizkit-tooltip h1 {
   font-size: 12px;
 }
@@ -115,7 +99,6 @@ body {
 <script src="../lib/d3.js"></script>
 <script src="../vizkit.js"></script>
 <script>
-
 var data = [
   [
     {"key": "apple", "xValue": '1', "yValue": '1'},
@@ -155,11 +138,6 @@ var DrawViz = vizkit.linechart(data)
 
 
 DrawViz(d3.select('.viz'));
-
-window.onresize = function(event) {
-  d3.select('.viz svg').remove();
-  DrawViz(d3.select('.viz'));
-}
 </script>
 </body>
 </html>

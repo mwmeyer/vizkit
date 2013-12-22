@@ -84,6 +84,14 @@ var DrawViz = vizkit.linechart(data)
 
 
 DrawViz(d3.select('.viz'));
+
+var i = 6;
+setInterval(function() {
+  d3.select('.viz svg').remove();
+  data[0].push({"key": "apple", "xValue": i, "yValue": Math.floor((Math.random()*10)+1)});
+  DrawViz(d3.select('.viz'));
+  i++;
+}, 1000);
 </script>
 </body>
 </html>

@@ -2,9 +2,6 @@
 <html>
 <head>
 <style>
-body {
-  font: helvetica;
-}
 .overlay {
   fill: #649DED;
 }
@@ -12,16 +9,13 @@ body {
   fill: #CACBCC;
 }
 .count {
-  font-family: helvetica;
   font-size: 20px;
   font-weight: bold;
 }
 .title {
-  font-family: helvetica;
   font-size: 20px;
 }
 .bound {
-  font-family: helvetica;
   font-size: 15px;
 }
 .viz {
@@ -32,14 +26,12 @@ body {
 </style>
 </head>
 <body>
-
-
+  
 <div class="viz"></div>
 
 <script src="../lib/d3.js"></script>
 <script src="../vizkit.js"></script>
 <script>
-
 var DrawViz = vizkit.gauge(50)
                     .range([0,200]);
 

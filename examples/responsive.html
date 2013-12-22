@@ -84,6 +84,11 @@ var DrawViz = vizkit.linechart(data)
 
 
 DrawViz(d3.select('.viz'));
+
+window.onresize = function(event) {
+  d3.select('.viz svg').remove();
+  DrawViz(d3.select('.viz'));
+}
 </script>
 </body>
 </html>
