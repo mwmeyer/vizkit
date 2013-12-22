@@ -492,13 +492,17 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                       .style("visibility", "hidden");
 
         peaks.on("mouseover", function(d){
-
-                        return chartTooltip.style("visibility", "visible")
-                                      .html(tooltip.content.replace('{{key}}', d.key)
-                                                           .replace('{{xValue}}', d.xValue)
-                                                           .replace('{{yValue}}', d.yValue));
+                    // get the viz elements containing elements offsets
+                    var offsetY = this.ownerSVGElement.parentNode.parentNode.offsetTop;
+                    var offsetX = this.ownerSVGElement.parentNode.parentNode.offsetLeft;
+                    return chartTooltip.style("visibility", "visible")
+                                  .html(tooltip.content.replace('{{key}}', d.key)
+                                                       .replace('{{xValue}}', d.xValue)
+                                                       .replace('{{yValue}}', d.yValue)
+                                        )
+                                  .style("top", (event.pageY - offsetY)+"px")
+                                  .style("left",(event.pageX - offsetX)+"px");
                   })
-             .on("mousemove", function(){return chartTooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
              .on("mouseout", function(){return chartTooltip.style("visibility", "hidden");});
       }
 

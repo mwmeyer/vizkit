@@ -4,12 +4,12 @@ body, h1, h3 {
 hr { 
     border-style: solid;
 }
-a {
+.navi a {
   text-decoration: none !important;
   color: black;
   letter-spacing: 1px !important;
 }
-li a:hover {
+.navi li a:hover {
   color: white;
   text-shadow:
    -1px -1px 0 #000,  
@@ -17,7 +17,7 @@ li a:hover {
     -1px 1px 0 #000,
      1px 1px 0 #000;
 }
-li a.active {
+.navi li a.active {
   color: white;
   text-shadow:
    -1px -1px 0 #000,  
