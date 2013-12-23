@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link href='style.css' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
@@ -10,12 +9,13 @@
 <a href="https://github.com/mwmeyer/vizkit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
 
 <div class="container">
-<h1>VizKit Documentation</h1>
+<h1>vizkit documentation</h1>
 <blockquote>
   <p>vizkit.js is an opinionated little charting library built on top of the amazing and wonderful d3.js visualization framework.</p>
 </blockquote>
 <hr>
 
+<div class="row">
 <div class="col-md-3">
 <ul class="navi">
 <li><a class="active" href="index.html">Overview</a></li>
@@ -32,7 +32,32 @@
 </div>
 
 <div class="col-md-9">
-foo docs here
+  <p>The core design of vizkit was heavily inspired by the article <a href="http://bost.ocks.org/mike/chart/">Towards Reusable Charts</a> from d3.js author Mike Bostock. With this approach, getting a visualization on the screen involves just a few quick steps.</p>
+  
+  <br>
+
+  <h4>Initialize</h4>
+  <p><pre>var DrawViz = vizkit.linechart()</pre></p>
+  <p>some foo about foo </p>
+  
+  <br>
+
+  <h4>Supply Data</h4>
+  <p><pre>DrawViz(d3.select('.viz'));</pre></p>
+  <p>some foo about foo </p>
+
+  <br>
+
+  <h4>Configure</h4>
+  <p><pre>DrawViz(d3.select('.viz'));</pre></p>
+  <p>some foo about foo </p>
+
+  <br>
+
+  <h4>Bind</h4>
+  <p><pre>DrawViz(d3.select('.viz'));</pre></p>
+  <p>some foo about foo </p>
+</div>
 </div>
 </div>
 <br>
