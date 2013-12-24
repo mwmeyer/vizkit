@@ -36,27 +36,28 @@
   
   <br>
 
-  <h4>Initialize</h4>
-  <p><pre>var DrawViz = vizkit.linechart()</pre></p>
-  <p>some foo about foo </p>
-  
-  <br>
-
-  <h4>Supply Data</h4>
-  <p><pre>DrawViz(d3.select('.viz'));</pre></p>
-  <p>some foo about foo </p>
+  <h4>Instantiate</h4>
+  <p><pre>var DrawViz = vizkit.linechart(data)</pre></p>
+  <p>All vizkit charts are closures assigned as properties to the main vizkit library object. When instantiating each chart the data to be visualized is passed along as the sole parameter to the function. ( Note: data format will vary depending on the chart type! )</p>
 
   <br>
 
   <h4>Configure</h4>
-  <p><pre>DrawViz(d3.select('.viz'));</pre></p>
-  <p>some foo about foo </p>
+  <p>
+    <pre>
+var DrawViz = vizkit.linechart(data)
+                    .yAxis({title: 'foo'})
+                    .xAxis({title: 'bar'});
+    </pre>
+    </p>
+  <p>Chart configuration is facilitated via chained methods of the chart closure. Configuration in this manner keeps the style of vizkit similar to that of d3.js and also prevents the use of large unweildly configuration objects.</p>
 
   <br>
 
   <h4>Bind</h4>
   <p><pre>DrawViz(d3.select('.viz'));</pre></p>
-  <p>some foo about foo </p>
+  <p>
+    The final step is passing vizkit the DOM element you wish to place the visualization within; doing so renders the chart! Notice that the element must be passed using d3.select. Also notice how the vizkit chart function was set to a variable before being rendered, this enables easier redrawing of the visualization should your data or configuration change on the fly. </p>
 </div>
 </div>
 </div>
