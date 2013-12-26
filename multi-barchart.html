@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link href='style.css' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<a href="https://github.com/mwmeyer/vizkit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
+
+<div class="container">
+<h1>vizkit documentation</h1>
+<blockquote>
+  <p>vizkit.js is an opinionated little charting library built on top of the amazing and wonderful d3.js visualization framework.</p>
+</blockquote>
+<hr>
+
+<div class="row">
+<div class="col-md-3">
+<ul class="navi">
+<li><a href="index.html">Overview</a></li>
+<li><a href="linechart.html">Line Chart</a></li>
+<li><a href="barchart.html">Bar Chart</a></li>
+<li><a href="multi-linechart.html">Multi Line Chart</a></li>
+<li><a class="active" href="multi-barchart.html">Multi Bar Chart</a></li>
+<li><a href="piechart.html">Pie Chart</a></li>
+<li><a href="gauge.html">Gauge</a></li>
+<li><a href="livedata.html">Live Data</a></li>
+<li><a href="responsiveness.html">Responsiveness</a></li>
+</ul>
+</div>
+
+<div class="col-md-9">
+
+<h2 style="text-align: center">Multi Bar Chart</h2>
+
+<div class="viz"></div>
+
+<a href="https://raw.github.com/mwmeyer/vizkit/master/examples/multi_barchart.html">EXAMPLE CODE</a>
+
+<h4>vizkit is design such that rendering multiple datasets in a single chart is achieved by simply modifying the data passed to the chart. The data for a single bar chart will look like this:</h4>
+
+<pre>
+// single bar chart data
+var data = [
+  [
+    {"key": "apple", "xValue": '1', "yValue": '1'},
+    {"key": "apple", "xValue": '2', "yValue": '2'},
+    {"key": "apple", "xValue": '3', "yValue": '3'},
+    {"key": "apple", "xValue": '4', "yValue": '4'},
+    {"key": "apple", "xValue": '5', "yValue": '5'}
+  ]
+];
+</pre> 
+
+<h4>Notice how even though a single bar is to be rendered, the data is still in the format of a 2 dimentional array. This makes adding additional lines to the chart just a matter of adding additional arrarys:</h4>
+
+<pre>
+// multi bar chart data
+var data = [
+  [
+    {"key": "apple", "xValue": '1', "yValue": '1'},
+    {"key": "apple", "xValue": '2', "yValue": '2'},
+    {"key": "apple", "xValue": '3', "yValue": '3'},
+    {"key": "apple", "xValue": '4', "yValue": '4'},
+    {"key": "apple", "xValue": '5', "yValue": '5'}
+  ],
+  [
+    {"key": "banana", "xValue": '1', "yValue": '3'},
+    {"key": "banana", "xValue": '2', "yValue": '4'},
+    {"key": "banana", "xValue": '3', "yValue": '2'},
+    {"key": "banana", "xValue": '4', "yValue": '6'},
+    {"key": "banana", "xValue": '5', "yValue": '5'}
+  ], 
+  [
+    {"key": "orange", "xValue": '1', "yValue": '9'},
+    {"key": "orange", "xValue": '2', "yValue": '6'},
+    {"key": "orange", "xValue": '3', "yValue": '1'},
+    {"key": "orange", "xValue": '4', "yValue": '2'},
+    {"key": "orange", "xValue": '5', "yValue": '2'}
+  ],
+  [
+    {"key": "cherry", "xValue": '1', "yValue": '10'},
+    {"key": "cherry", "xValue": '2', "yValue": '7'},
+    {"key": "cherry", "xValue": '3', "yValue": '2'},
+    {"key": "cherry", "xValue": '4', "yValue": '1'},
+    {"key": "cherry", "xValue": '5', "yValue": '3'}
+  ],
+];
+</pre> 
+
+<h4>One preparing the data, you would create the multi bar chart the same way as a single bar chart. All <a href="barchart.html">configuration methods</a> of the single bar chart are still usable as well:</h4>
+
+<pre>
+var DrawViz = vizkit.barchart(data)
+                    .xAxis({scale: 'ordinal'})
+                    .legend({addMouseoverClasses: true, symbol: {type: 'square'}})
+                    .tooltip({content: "&lt;h1&gt;{{key}}:&lt;/h1&gt;&lt;p&gt;{{xValue}}, {{yValue}}&lt;/p&gt;"});
+
+
+DrawViz(d3.select('.viz'));
+</pre>
+</div>
+</div>
+</div>
+<br>
+<br>
+<br>
+
+<style>
+.axis path {
+  fill: none;
+  stroke: #C0C0C0;
+  shape-rendering: crispEdges;
+}
+.tick.major line {
+  stroke: #C0C0C0;
+  shape-rendering: crispEdges;
+}
+.viz {
+  height: 500px;
+}
+.y-title, .x-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.legend {
+  font-size: 12px;
+}
+.vizkit-tooltip {
+  background-color: whiteSmoke;
+  padding: 5px;
+  border: 1px solid #E0E0E0;
+}
+.vizkit-tooltip h1 {
+  font-size: 12px;
+}
+.bar-mo {
+  stroke: none;
+}
+.key-mo {
+  -webkit-svg-shadow: 0 0 7px #53BE12;
+}
+.bar-nomo {
+  stroke: #c0c0c0;
+  fill: whiteSmoke !important;
+}
+.key-nomo {
+  fill: whiteSmoke !important;
+}
+.bar-set-1 .bar {
+  fill: #7591FF;
+}
+.bar-set-2 .bar {
+  fill: #F24E4E;
+}
+.bar-set-3 .bar{
+  fill: #00E00F;
+}
+.bar-set-4 .bar{
+  fill: #E0BF00;
+}
+.key-1 {
+  fill: #7591FF;
+}
+.key-2 {
+  fill: #F24E4E;
+}
+.key-3 {
+  fill: #00E00F;
+}
+.key-4 {
+  fill: #E0BF00;
+}
+</style>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://rawgithub.com/mwmeyer/vizkit/master/vizkit.js"></script>
+<script>
+var data = [
+  [
+    {"key": "apple", "xValue": '1', "yValue": '1'},
+    {"key": "apple", "xValue": '2', "yValue": '2'},
+    {"key": "apple", "xValue": '3', "yValue": '3'},
+    {"key": "apple", "xValue": '4', "yValue": '4'},
+    {"key": "apple", "xValue": '5', "yValue": '5'}
+  ],
+  [
+    {"key": "banana", "xValue": '1', "yValue": '3'},
+    {"key": "banana", "xValue": '2', "yValue": '4'},
+    {"key": "banana", "xValue": '3', "yValue": '2'},
+    {"key": "banana", "xValue": '4', "yValue": '6'},
+    {"key": "banana", "xValue": '5', "yValue": '5'}
+  ], 
+  [
+    {"key": "orange", "xValue": '1', "yValue": '9'},
+    {"key": "orange", "xValue": '2', "yValue": '6'},
+    {"key": "orange", "xValue": '3', "yValue": '1'},
+    {"key": "orange", "xValue": '4', "yValue": '2'},
+    {"key": "orange", "xValue": '5', "yValue": '2'}
+  ],
+  [
+    {"key": "cherry", "xValue": '1', "yValue": '10'},
+    {"key": "cherry", "xValue": '2', "yValue": '7'},
+    {"key": "cherry", "xValue": '3', "yValue": '2'},
+    {"key": "cherry", "xValue": '4', "yValue": '1'},
+    {"key": "cherry", "xValue": '5', "yValue": '3'}
+  ],
+];
+
+var DrawViz = vizkit.barchart(data)
+                    .xAxis({scale: 'ordinal'})
+                    .legend({addMouseoverClasses: true, symbol: {type: 'square'}})
+                    .tooltip({content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"});
+
+DrawViz(d3.select('.viz'));
+</script>
+</body>
+</html>

@@ -21,12 +21,12 @@
 <li><a href="index.html">Overview</a></li>
 <li><a class="active" href="linechart.html">Line Chart</a></li>
 <li><a href="barchart.html">Bar Chart</a></li>
-<li><a href="">Multi Line Chart</a></li>
-<li><a href="">Multi Bar Chart</a></li>
-<li><a href="">Pie Chart</a></li>
-<li><a href="">Gauge</a></li>
-<li><a href="">Live Data</a></li>
-<li><a href="">Responsiveness</a></li>
+<li><a href="multi-linechart.html">Multi Line Chart</a></li>
+<li><a href="multi-barchart.html">Multi Bar Chart</a></li>
+<li><a href="piechart.html">Pie Chart</a></li>
+<li><a href="gauge.html">Gauge</a></li>
+<li><a href="livedata.html">Live Data</a></li>
+<li><a href="responsiveness.html">Responsiveness</a></li>
 </ul>
 </div>
 
@@ -242,11 +242,6 @@ var DrawViz = vizkit.linechart(data)
 
 
 DrawViz(d3.select('.viz'));
-
-window.onresize = function(event) {
-  d3.select('.viz svg').remove();
-  DrawViz(d3.select('.viz'));
-}
 </script>
 </body>
 </html>

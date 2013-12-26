@@ -24,15 +24,30 @@
 <li><a href="multi-barchart.html">Multi Bar Chart</a></li>
 <li><a href="piechart.html">Pie Chart</a></li>
 <li><a href="gauge.html">Gauge</a></li>
-<li><a href="livedata.html">Live Data</a></li>
+<li><a class="active" href="livedata.html">Live Data</a></li>
 <li><a href="responsiveness.html">Responsiveness</a></li>
 </ul>
 </div>
 
 <div class="col-md-9">
+
+<h2 style="text-align: center">Live Data</h2>
+
 <div class="viz"></div>
 
-<a href="https://raw.github.com/mwmeyer/vizkit/master/examples/areachart.html">EXAMPLE CODE</a>
+<a href="https://raw.github.com/mwmeyer/vizkit/master/examples/live_data.html">EXAMPLE CODE</a>
+
+<h4>Visualizing a real time feed of your data can be achieved trivially with vizkit. Simply update your data and redraw the chart. The example live data above is being updated like so:</h4>
+
+<pre>
+var i = 6;
+setInterval(function() {
+  d3.select('.viz svg').remove();
+  data[0].push({"key": "apple", "xValue": i, "yValue": Math.floor((Math.random()*10)+1)});
+  DrawViz(d3.select('.viz'));
+  i++;
+}, 1000);
+</pre>
 
 </div>
 </div>
@@ -47,12 +62,9 @@
   stroke: #C0C0C0;
   shape-rendering: crispEdges;
 }
-.tick.major line {
+.tick line {
   stroke: #C0C0C0;
   shape-rendering: crispEdges;
-}
-.area-1 {
-  fill: #7591FF;
 }
 .line-1 {
   fill: none;
@@ -65,10 +77,22 @@
   fill: #7591FF;
   cursor: pointer;
 }
+.line-mo {
+  -webkit-svg-shadow: 0 0 7px #53BE12;
+}
+.key-mo {
+  -webkit-svg-shadow: 0 0 7px #53BE12;
+}
+.line-nomo {
+  stroke: whiteSmoke;
+}
+.key-nomo {
+  fill: whiteSmoke;
+}
 .viz {
   height: 500px;
   margin: 20px;
-  font-family: 'Open Sans', sans-serif;
+  cursor: crosshair;
 }
 .area {
   fill: steelBlue;
@@ -96,21 +120,28 @@ var data = [
   [
     {"key": "apple", "xValue": '1', "yValue": '1'},
     {"key": "apple", "xValue": '2', "yValue": '2'},
-    {"key": "apple", "xValue": '3', "yValue": '5'},
+    {"key": "apple", "xValue": '3', "yValue": '3'},
     {"key": "apple", "xValue": '4', "yValue": '4'},
-    {"key": "apple", "xValue": '5', "yValue": '2'}
+    {"key": "apple", "xValue": '5', "yValue": '5'}
   ]
 ];
 
 var DrawViz = vizkit.linechart(data)
-                     .yAxis({title: 'foo', scale: 'linear'})
-                     .xAxis({title: 'bar', scale: 'linear'})
-                     .area(true)
-                     .legend({symbol: {type: 'cross'}})
-                     .tooltip(false);
+                     .yAxis({title: 'foo', scale: 'linear', gridLine: true})
+                     .xAxis({title: 'bar', scale: 'linear', gridLine: true})
+                     .legend({addMouseoverClasses: true, symbol: {type: 'square'}})
+                     .tooltip({content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"});
 
 
 DrawViz(d3.select('.viz'));
+
+var i = 6;
+setInterval(function() {
+  d3.select('.viz svg').remove();
+  data[0].push({"key": "apple", "xValue": i, "yValue": Math.floor((Math.random()*10)+1)});
+  DrawViz(d3.select('.viz'));
+  i++;
+}, 1000);
 </script>
 </body>
 </html>

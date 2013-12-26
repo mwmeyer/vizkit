@@ -22,7 +22,7 @@
 <li><a href="barchart.html">Bar Chart</a></li>
 <li><a href="multi-linechart.html">Multi Line Chart</a></li>
 <li><a href="multi-barchart.html">Multi Bar Chart</a></li>
-<li><a href="piechart.html">Pie Chart</a></li>
+<li><a class="active" href="piechart.html">Pie Chart</a></li>
 <li><a href="gauge.html">Gauge</a></li>
 <li><a href="livedata.html">Live Data</a></li>
 <li><a href="responsiveness.html">Responsiveness</a></li>
@@ -30,9 +30,48 @@
 </div>
 
 <div class="col-md-9">
+
+<h2>Pie Chart</h2>
+
 <div class="viz"></div>
 
-<a href="https://raw.github.com/mwmeyer/vizkit/master/examples/areachart.html">EXAMPLE CODE</a>
+<a href="https://raw.github.com/mwmeyer/vizkit/master/examples/piechart.html">EXAMPLE CODE</a>
+
+<h3>Configuration Methods</h3><hr>
+
+<h4><code>.yaxis({key: value})</code> / <code>.xaxis({key: value})</code></h4>
+<p>Configuration method used to specify properties of the chart axis.</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Key Name</th>
+      <th>Description</th>
+      <th>Allowed Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>tickFormat</td>
+      <td>A number format function suitable for displaying a tick value.</td>
+      <td><a href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">d3 format specifer</a></td>
+    </tr>
+    <tr>
+      <td>ticks</td>
+      <td>The number of ticks this axis should have.</td>
+      <td>integer</td>
+    </tr>
+    <tr>
+      <td>scale</td>
+      <td>Specifies the d3.js scale to use with this axis. see: <a href="https://github.com/mbostock/d3/wiki/Scales">scales</a>.</td>
+      <td>'linear', 'ordinal', or 'time'</td>
+    </tr>
+    <tr>
+      <td>gridLine</td>
+      <td>Specifies whether the chart ticks should extend vertically to the axis.</td>
+      <td>true or false</td>
+    </tr>
+  </tbody>
+</table>
 
 </div>
 </div>
@@ -42,75 +81,25 @@
 <br>
 
 <style>
-.axis path {
-  fill: none;
-  stroke: #C0C0C0;
-  shape-rendering: crispEdges;
-}
-.tick.major line {
-  stroke: #C0C0C0;
-  shape-rendering: crispEdges;
-}
-.area-1 {
-  fill: #7591FF;
-}
-.line-1 {
-  fill: none;
-  stroke: #7591FF;
-}
-.line-1 .symbol {
-  fill: white;
-}
-.key-1 {
-  fill: #7591FF;
-  cursor: pointer;
-}
 .viz {
+  width: 500px;
   height: 500px;
-  margin: 20px;
-  font-family: 'Open Sans', sans-serif;
-}
-.area {
-  fill: steelBlue;
-}
-.y-title, .x-title {
-  font-size: 20px;
-  font-weight: bold;
-}
-.legend {
-  font-size: 12px;
-}
-.vizkit-tooltip {
-  background-color: whiteSmoke;
-  padding: 5px;
-  border: 1px solid #E0E0E0;
-}
-.vizkit-tooltip h1 {
-  font-size: 12px;
+  border: 1px solid whiteSmoke;
 }
 </style>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://rawgithub.com/mwmeyer/vizkit/master/vizkit.js"></script>
 <script>
 var data = [
-  [
-    {"key": "apple", "xValue": '1', "yValue": '1'},
-    {"key": "apple", "xValue": '2', "yValue": '2'},
-    {"key": "apple", "xValue": '3', "yValue": '5'},
-    {"key": "apple", "xValue": '4', "yValue": '4'},
-    {"key": "apple", "xValue": '5', "yValue": '2'}
-  ]
-];
+        {"key":"Pumpkin", "value":10}, 
+        {"key":"Apple", "value":20}, 
+        {"key":"Blueberry", "value":50}
+       ];
 
-var DrawViz = vizkit.linechart(data)
-                     .yAxis({title: 'foo', scale: 'linear'})
-                     .xAxis({title: 'bar', scale: 'linear'})
-                     .area(true)
-                     .legend({symbol: {type: 'cross'}})
-                     .tooltip(false);
-
+var DrawViz = vizkit.piechart(data);
 
 DrawViz(d3.select('.viz'));
+
 </script>
 </body>
 </html>

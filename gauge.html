@@ -23,16 +23,38 @@
 <li><a href="multi-linechart.html">Multi Line Chart</a></li>
 <li><a href="multi-barchart.html">Multi Bar Chart</a></li>
 <li><a href="piechart.html">Pie Chart</a></li>
-<li><a href="gauge.html">Gauge</a></li>
+<li><a class="active" href="gauge.html">Gauge</a></li>
 <li><a href="livedata.html">Live Data</a></li>
 <li><a href="responsiveness.html">Responsiveness</a></li>
 </ul>
 </div>
 
 <div class="col-md-9">
+
+<h2>Gauge</h2>
+
 <div class="viz"></div>
 
-<a href="https://raw.github.com/mwmeyer/vizkit/master/examples/areachart.html">EXAMPLE CODE</a>
+<a href="https://raw.github.com/mwmeyer/vizkit/master/examples/gauge.html">EXAMPLE CODE</a>
+
+<h3>Configuration Methods</h3><hr>
+
+<h4><code>.range([0, 100])</code></h4>
+<p>Configuration method used to specify properties of the chart axis.</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Allowed Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The range method rakes an array defining the lower and upper bounds of the gauge.</td>
+      <td>integer</td>
+    </tr>
+  </tbody>
+</table>
 
 </div>
 </div>
@@ -42,73 +64,33 @@
 <br>
 
 <style>
-.axis path {
-  fill: none;
-  stroke: #C0C0C0;
-  shape-rendering: crispEdges;
+.overlay {
+  fill: #649DED;
 }
-.tick.major line {
-  stroke: #C0C0C0;
-  shape-rendering: crispEdges;
+.bg {
+  fill: #CACBCC;
 }
-.area-1 {
-  fill: #7591FF;
-}
-.line-1 {
-  fill: none;
-  stroke: #7591FF;
-}
-.line-1 .symbol {
-  fill: white;
-}
-.key-1 {
-  fill: #7591FF;
-  cursor: pointer;
-}
-.viz {
-  height: 500px;
-  margin: 20px;
-  font-family: 'Open Sans', sans-serif;
-}
-.area {
-  fill: steelBlue;
-}
-.y-title, .x-title {
+.count {
   font-size: 20px;
   font-weight: bold;
 }
-.legend {
-  font-size: 12px;
+.title {
+  font-size: 20px;
 }
-.vizkit-tooltip {
-  background-color: whiteSmoke;
-  padding: 5px;
-  border: 1px solid #E0E0E0;
+.bound {
+  font-size: 15px;
 }
-.vizkit-tooltip h1 {
-  font-size: 12px;
+.viz {
+  width: 500px;
+  height: 500px;
+  border: 1px solid whiteSmoke;
 }
 </style>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://rawgithub.com/mwmeyer/vizkit/master/vizkit.js"></script>
 <script>
-var data = [
-  [
-    {"key": "apple", "xValue": '1', "yValue": '1'},
-    {"key": "apple", "xValue": '2', "yValue": '2'},
-    {"key": "apple", "xValue": '3', "yValue": '5'},
-    {"key": "apple", "xValue": '4', "yValue": '4'},
-    {"key": "apple", "xValue": '5', "yValue": '2'}
-  ]
-];
-
-var DrawViz = vizkit.linechart(data)
-                     .yAxis({title: 'foo', scale: 'linear'})
-                     .xAxis({title: 'bar', scale: 'linear'})
-                     .area(true)
-                     .legend({symbol: {type: 'cross'}})
-                     .tooltip(false);
-
+var DrawViz = vizkit.gauge(50)
+                    .range([0,200]);
 
 DrawViz(d3.select('.viz'));
 </script>
