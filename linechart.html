@@ -21,7 +21,6 @@
 <li><a href="index.html">Overview</a></li>
 <li><a class="active" href="linechart.html">Line Chart</a></li>
 <li><a href="barchart.html">Bar Chart</a></li>
-<li><a href="">Area Chart</a></li>
 <li><a href="">Multi Line Chart</a></li>
 <li><a href="">Multi Bar Chart</a></li>
 <li><a href="">Pie Chart</a></li>
@@ -95,6 +94,23 @@
       <td>symbol</td>
       <td>symbol used for points on the chart.</td>
       <td><a href="https://github.com/mbostock/d3/wiki/SVG-Shapes#wiki-symbol_type">d3 symbol object</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4><code>.area()</code></h4>
+<p>Configuration method used to specify whether area below lines should be filled.</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Allowed Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>area charts are just line charts with the area below them filled in. To add an ".area-x" class which can be filled for each line, simply provide a true value to this configuration method. <a href="areachart.html">area chart example</a>.</td>
+      <td>true or false</td>
     </tr>
   </tbody>
 </table>
