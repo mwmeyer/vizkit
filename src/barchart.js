@@ -9,7 +9,7 @@
         yAxis = {scale: 'linear', gridLine: false, minVal: 0},
         bar = {},
         legend = {},
-        tooltip = {content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"};
+        tooltip = false;
     
     var viz = function(vizContainer) {
 
@@ -177,7 +177,6 @@
                                       .attr("transform", function(d, i) { return "translate(" + 0 + "," + i *  20 + ")"; })
                                       .attr('class', function(d){ return 'key-' +  (data.indexOf(d) + 1) });
 
-
         if (legend.addMouseoverClasses){
 
           LegendSymbols.on("mouseover", function(d){
@@ -185,11 +184,11 @@
                       for (var i=1; i <= data.length; i++){
                         if (i !== curr_hover){
                           d3.select('.key-' +  i).classed('key-nomo', true);
-                          d3.select('.bar-' + i).classed('bar-nomo', true);
+                          d3.selectAll('.bar-set-' + i + ' .bar').classed('bar-nomo', true);
                         }
                         else if (i === curr_hover){
                           d3.select('.key-' +  i).classed('key-mo', true);
-                          d3.select('.bar-' + i).classed('bar-mo', true);
+                          d3.selectAll('.bar-set-' + i + ' .bar').classed('bar-mo', true);
                         }
 
                       }
@@ -199,11 +198,11 @@
                       for (var i=1; i <= data.length; i++){
                         if (i !== curr_hover){
                           d3.select('.key-' +  i).classed('key-nomo', false);
-                          d3.select('.bar-' + i).classed('bar-nomo', false);
+                          d3.selectAll('.bar-set-' + i + ' .bar').classed('bar-nomo', false);
                         }
                         else if (i === curr_hover){
                           d3.select('.key-' +  i).classed('key-mo', false);
-                          d3.select('.bar-' + i).classed('bar-mo', false);
+                          d3.selectAll('.bar-set-' + i + ' .bar').classed('bar-mo', false);
                         }
                       }
                       });
@@ -233,11 +232,13 @@
                                 return "translate(" + ((data.indexOf(d) * (x.rangeBand() / data.length) )) + ",0)"; }
                               );
 
-          barContainers.selectAll(".bar")
+          var bars = barContainers.selectAll(".bar")
           .data(function(d){ 
             return d; })
           .enter().append("rect")
-          .attr("class", function(d){ return d.key + '-bar'})
+          .attr("class", function(d){ 
+            return 'bar bar-' + d.xValue;
+          })
           .attr("x", function(d) { 
             return x(d.xValue); 
           })
@@ -249,6 +250,31 @@
             return height - y(d.yValue) - margin; });
 
         }
+
+        /* ---- Bar Tooltip ---- */
+      if(tooltip){
+        var chartTooltip = vizContainer.append("div")
+                      .attr('class', 'vizkit-tooltip')
+                      .style("position", "absolute")
+                      .style("z-index", "10")
+                      .style("visibility", "hidden");
+
+        bars.on("mouseover", function(d){
+                    // get the viz elements containing elements offsets
+                    var offsetY = this.ownerSVGElement.parentNode.parentNode.offsetTop;
+                    var offsetX = this.ownerSVGElement.parentNode.parentNode.offsetLeft;
+
+                    return chartTooltip.style("visibility", "visible")
+                                  .html(tooltip.content.replace('{{key}}', d.key)
+                                                       .replace('{{xValue}}', d.xValue)
+                                                       .replace('{{yValue}}', d.yValue)
+                                        )
+                                  .style("top", (event.pageY - offsetY)+"px")
+                                  .style("left",(event.pageX - offsetX)+"px");
+                  })
+             .on("mouseout", function(){return chartTooltip.style("visibility", "hidden");});
+      }
+
 
     }
 

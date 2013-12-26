@@ -14,9 +14,6 @@
 .viz {
   height: 500px;
 }
-.area {
-  fill: steelBlue;
-}
 .y-title, .x-title {
   font-size: 20px;
   font-weight: bold;
@@ -32,20 +29,29 @@
 .vizkit-tooltip h1 {
   font-size: 12px;
 }
-rect {
-    stroke: black;
-    fill: white;
+.bar-mo {
+  stroke: none;
 }
-.apple-bar {
+.key-mo {
+  -webkit-svg-shadow: 0 0 7px #53BE12;
+}
+.bar-nomo {
+  stroke: #c0c0c0;
+  fill: whiteSmoke !important;
+}
+.key-nomo {
+  fill: whiteSmoke !important;
+}
+.bar-set-1 .bar {
   fill: #7591FF;
 }
-.banana-bar {
+.bar-set-2 .bar {
   fill: #F24E4E;
 }
-.orange-bar {
+.bar-set-3 .bar{
   fill: #00E00F;
 }
-.cherry-bar {
+.bar-set-4 .bar{
   fill: #E0BF00;
 }
 .key-1 {
@@ -101,7 +107,9 @@ var data = [
 ];
 
 var DrawViz = vizkit.barchart(data)
-                    .xAxis({scale: 'ordinal'});
+                    .xAxis({scale: 'ordinal'})
+                    .legend({addMouseoverClasses: true, symbol: {type: 'square'}})
+                    .tooltip({content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"});
 
 DrawViz(d3.select('.viz'));
 </script>

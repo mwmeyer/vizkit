@@ -36,7 +36,7 @@ rect {
     stroke: black;
     fill: white;
 }
-.apple-bar {
+.bar-set-1 .bar {
   fill: #7591FF;
 }
 .key-1 {
@@ -62,7 +62,8 @@ var data = [
 ];
 
 var DrawViz = vizkit.barchart(data)
-                    .xAxis({scale: 'ordinal'});
+                    .xAxis({scale: 'ordinal'})
+                    .legend({symbol: {type: 'square'}});
 
 DrawViz(d3.select('.viz'));
 </script>
