@@ -22,18 +22,6 @@
   fill: #7591FF;
   cursor: pointer;
 }
-.line-mo {
-  -webkit-svg-shadow: 0 0 7px #53BE12;
-}
-.key-mo {
-  -webkit-svg-shadow: 0 0 7px #53BE12;
-}
-.line-nomo {
-  stroke: whiteSmoke;
-}
-.key-nomo {
-  fill: whiteSmoke;
-}
 .viz {
   height: 500px;
   margin: 20px;
@@ -79,7 +67,7 @@ var data = [
 var DrawViz = vizkit.linechart(data)
                      .yAxis({title: 'foo', scale: 'linear', gridLine: true})
                      .xAxis({title: 'bar', scale: 'linear', gridLine: true})
-                     .legend({addMouseoverClasses: true, symbol: {type: 'square'}})
+                     .legend({addMouseoverClasses: false, symbol: {type: 'square'}})
                      .tooltip({content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"});
 
 
