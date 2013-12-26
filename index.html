@@ -59,6 +59,11 @@ var DrawViz = vizkit.linechart(data)
   <p><pre>DrawViz(d3.select('.viz'));</pre></p>
   <p>
     The final step is passing vizkit the DOM element you wish to place the visualization within; doing so renders the chart! Notice that the element must be passed using d3.select. Also notice how the vizkit chart function was set to a variable before being rendered, this enables easier redrawing of the visualization should your data or configuration change on the fly. </p>
+
+  <h2 style="text-align: center">Styling</h2>
+
+  <p>Keeping the style of a chart defined by CSS is one of the goals of vizkit.js. If something visual about a chart can be controlled easily with css, it likely is. For example, vizkit charts will attempt to inherit the height of their containing element, so it is a good practice to define the height explicitly in css. Be sure to take note of chart specific class name vizkit makes available for styling.</p>
+
 </div>
 </div>
 </div>
