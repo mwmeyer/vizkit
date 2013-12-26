@@ -30,6 +30,9 @@
 </div>
 
 <div class="col-md-9">
+
+<h2 style="text-align: center">Bar Chart</h2>
+
 <div class="viz"></div>
 
 <a href="https://raw.github.com/mwmeyer/vizkit/master/examples/barchart.html">EXAMPLE CODE</a>
@@ -107,7 +110,7 @@
   <tbody>
     <tr>
       <td>content</td>
-      <td>A template string to display in the tooltip. Variables to display in the template between brackets are key, xValue, and yValue. </td>
+      <td>A template string to display in the tooltip. Variables to display in the template between brackets are key, xValue, and yValue. If true, a div with the class name .vizkit-tooltip will be available for styling.</td>
       <td>string template like: "&lt;h1&gt;{{key}}:&lt;/h1&gt;&lt;p&gt;{{xValue}}, {{yValue}}&lt;/p&gt;"</td>
     </tr>
   </tbody>
@@ -167,11 +170,11 @@ rect {
 <script>
 var data = [
   [
-    {"key": "apple", "xValue": '1', "yValue": '1'},
-    {"key": "apple", "xValue": '2', "yValue": '2'},
-    {"key": "apple", "xValue": '3', "yValue": '3'},
-    {"key": "apple", "xValue": '4', "yValue": '4'},
-    {"key": "apple", "xValue": '5', "yValue": '5'}
+    {"key": "foobar", "xValue": '1', "yValue": '1'},
+    {"key": "foobar", "xValue": '2', "yValue": '2'},
+    {"key": "foobar", "xValue": '3', "yValue": '3'},
+    {"key": "foobar", "xValue": '4', "yValue": '4'},
+    {"key": "foobar", "xValue": '5', "yValue": '5'}
   ]
 ];
 

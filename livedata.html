@@ -43,7 +43,7 @@
 var i = 6;
 setInterval(function() {
   d3.select('.viz svg').remove();
-  data[0].push({"key": "apple", "xValue": i, "yValue": Math.floor((Math.random()*10)+1)});
+  data[0].push({"key": "foobar", "xValue": i, "yValue": Math.floor((Math.random()*10)+1)});
   DrawViz(d3.select('.viz'));
   i++;
 }, 1000);
@@ -106,11 +106,11 @@ setInterval(function() {
 <script>
 var data = [
   [
-    {"key": "apple", "xValue": '1', "yValue": '1'},
-    {"key": "apple", "xValue": '2', "yValue": '2'},
-    {"key": "apple", "xValue": '3', "yValue": '3'},
-    {"key": "apple", "xValue": '4', "yValue": '4'},
-    {"key": "apple", "xValue": '5', "yValue": '5'}
+    {"key": "foobar", "xValue": '1', "yValue": '1'},
+    {"key": "foobar", "xValue": '2', "yValue": '2'},
+    {"key": "foobar", "xValue": '3', "yValue": '3'},
+    {"key": "foobar", "xValue": '4', "yValue": '4'},
+    {"key": "foobar", "xValue": '5', "yValue": '5'}
   ]
 ];
 
@@ -126,7 +126,7 @@ DrawViz(d3.select('.viz'));
 var i = 6;
 setInterval(function() {
   d3.select('.viz svg').remove();
-  data[0].push({"key": "apple", "xValue": i, "yValue": Math.floor((Math.random()*10)+1)});
+  data[0].push({"key": "foobar", "xValue": i, "yValue": Math.floor((Math.random()*10)+1)});
   DrawViz(d3.select('.viz'));
   i++;
 }, 1000);
