@@ -7,7 +7,7 @@
 
     var xAxis = {scale: 'linear', gridLine: false},
         yAxis = {scale: 'linear', gridLine: false, minVal: 0},
-        line = {interpolate: 'linear'},
+        bar = {},
         legend = {},
         tooltip = {content: "<h1>{{key}}:</h1><p>{{xValue}}, {{yValue}}</p>"};
     
@@ -185,11 +185,11 @@
                       for (var i=1; i <= data.length; i++){
                         if (i !== curr_hover){
                           d3.select('.key-' +  i).classed('key-nomo', true);
-                          d3.select('.line-' + i).classed('line-nomo', true);
+                          d3.select('.bar-' + i).classed('bar-nomo', true);
                         }
                         else if (i === curr_hover){
                           d3.select('.key-' +  i).classed('key-mo', true);
-                          d3.select('.line-' + i).classed('line-mo', true);
+                          d3.select('.bar-' + i).classed('bar-mo', true);
                         }
 
                       }
@@ -199,11 +199,11 @@
                       for (var i=1; i <= data.length; i++){
                         if (i !== curr_hover){
                           d3.select('.key-' +  i).classed('key-nomo', false);
-                          d3.select('.line-' + i).classed('line-nomo', false);
+                          d3.select('.bar-' + i).classed('bar-nomo', false);
                         }
                         else if (i === curr_hover){
                           d3.select('.key-' +  i).classed('key-mo', false);
-                          d3.select('.line-' + i).classed('line-mo', false);
+                          d3.select('.bar-' + i).classed('bar-mo', false);
                         }
                       }
                       });
@@ -263,9 +263,9 @@
       yAxis = vizkit.utils.merge_objs(yAxis, value);
       return viz;
     }
-    viz.line = function(value) {
-      if(!arguments.length) return line;
-      line = vizkit.utils.merge_objs(line, value);
+    viz.bar = function(value) {
+      if(!arguments.length) return bar;
+      bar = vizkit.utils.merge_objs(line, value);
       return viz;
     }
     viz.legend = function(value) {
