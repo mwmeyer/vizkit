@@ -1,6 +1,6 @@
 # vizkit
 
-vizkit.js is an opinionated little charting library built on top of the amazing and wonderful d3.js visualization framework. For examples of some of the charts currently available, have a gander at the documentaion.
+vizkit.js is an opinionated little charting library built on top of the amazing and wonderful [d3.js](http://d3js.org/) visualization framework. For examples of some of the charts currently available, have a gander at the documentaion.
 
 ## Contributing
 
@@ -11,4 +11,7 @@ $ make clean
 $ make vizkit.js
 ```
 
-This will generate a new file with your additions. Pull requests are welcome!
+This will generate a new file with your additions. vizkit.js is still very much a WIP, pull requests are welcome!
+
+## Docs
+[http://mwmeyer.github.io/vizkit/](http://mwmeyer.github.io/vizkit/)
