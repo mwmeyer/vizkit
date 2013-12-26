@@ -248,7 +248,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                               .enter().append('g')
                               .attr('class', function(d){ return 'bar-set-' +  (data.indexOf(d) + 1) })
                               .attr("transform", function(d) { 
-                                return "translate(" + ((data.indexOf(d) * 10) + 50) + ",0)"; }
+                                return "translate(" + ((data.indexOf(d) * (x.rangeBand() / data.length) )) + ",0)"; }
                               );
 
           barContainers.selectAll(".bar")
@@ -259,7 +259,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
           .attr("x", function(d) { 
             return x(d.xValue); 
           })
-          .attr("width", 10) //x.rangeBand()
+          .attr("width", x.rangeBand() / data.length)
           .attr("y", function(d) { 
             return y(d.yValue); 
           })
