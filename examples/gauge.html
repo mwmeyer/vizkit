@@ -33,7 +33,8 @@
 <script src="../vizkit.js"></script>
 <script>
 var DrawViz = vizkit.gauge(50)
-                    .range([0,200]);
+                    .range([0,200])
+                    .title('My Gauge');
 
 
 DrawViz(d3.select('.viz'));

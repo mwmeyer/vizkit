@@ -718,7 +718,8 @@ vizkit.utils.merge_objs = function(obj1,obj2){
   //---------------------
   vizkit.gauge = function(gauge_value) {
 
-    var max = 100,
+    var title = '';
+        max = 100,
         min = 0,
         range = max - min;
     
@@ -780,7 +781,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
            .attr("dx", 0)
            .attr("dy", - ( width / 1.75))
            .attr("text-anchor", "middle")
-           .text("Concurrent Calls");
+           .text(title);
 
       gauge.append("text")
            .attr("class", "bound")
@@ -803,6 +804,12 @@ vizkit.utils.merge_objs = function(obj1,obj2){
       max = value[1];
       min = value[0];
       range = max - min;
+      return viz;
+    }
+
+    viz.title = function(value) {
+      if(!arguments.length) return title;
+      title = value;
       return viz;
     }
 
