@@ -221,6 +221,7 @@
                 .text(function(d){ return d[0].key; });
 
 
+        }
 
           /* ---- Graph Bar/s ---- */
 
@@ -248,8 +249,6 @@
           })
           .attr("height", function(d) { 
             return height - y(d.yValue) - margin; });
-
-        }
 
         /* ---- Bar Tooltip ---- */
       if(tooltip){

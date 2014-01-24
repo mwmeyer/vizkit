@@ -239,6 +239,7 @@ vizkit.utils.merge_objs = function(obj1,obj2){
                 .text(function(d){ return d[0].key; });
 
 
+        }
 
           /* ---- Graph Bar/s ---- */
 
@@ -266,8 +267,6 @@ vizkit.utils.merge_objs = function(obj1,obj2){
           })
           .attr("height", function(d) { 
             return height - y(d.yValue) - margin; });
-
-        }
 
         /* ---- Bar Tooltip ---- */
       if(tooltip){

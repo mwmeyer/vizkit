@@ -13,6 +13,7 @@ $ make vizkit.js
 
 This will generate a new file with your additions. vizkit.js is still very much a WIP, pull requests are welcome!
 
-(uglifyjs command line tool is needed to minify file, download it through [npm](https://npmjs.org/package/uglify-js)
+( uglifyjs command line tool is needed to minify file, download it through [npm](https://npmjs.org/package/uglify-js) )
+
 ## Docs
 [http://mwmeyer.github.io/vizkit/](http://mwmeyer.github.io/vizkit/)
